@@ -1,5 +1,5 @@
 
-const API_BASE_URL = 'http://localhost:3001/api';
+const API_BASE_URL = 'https://smart-water-backend-e6s6.onrender.com/api';
 let historyChart = null;
 let selectedZone = null;
 
