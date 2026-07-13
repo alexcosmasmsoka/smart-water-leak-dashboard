@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaGuard - Smart Water Leak Detection</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <i data-lucide="droplets" class="brand-icon"></i>
+        <span class="brand-name">AquaGuard</span>
+      </div>
+      <div class="navbar-controls">
+        <label for="zoneSelect" class="zone-label">Selected Zone</label>
+        <select id="zoneSelect" class="zone-select"></select>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Header Section -->
+      <section class="header-section">
+        <h1 class="main-title">Smart Water Leak Dashboard</h1>
+        <p class="main-subtitle">Monitor flow rate, pressure, and leak status across your zones in real-time</p>
+      </section>
+
+      <!-- Stats Section -->
+      <section class="stats-section">
+        <h2 class="section-label">Live Overview</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <i data-lucide="map-pin" class="stat-icon"></i>
+              <span class="stat-label">Zone</span>
+            </div>
+            <p class="stat-value" id="zoneName">--</p>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <i data-lucide="gauge" class="stat-icon"></i>
+              <span class="stat-label">Flow Rate</span>
+            </div>
+            <p class="stat-value" id="flowRate">-- L/min</p>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <i data-lucide="activity" class="stat-icon"></i>
+              <span class="stat-label">Pressure</span>
+            </div>
+            <p class="stat-value" id="pressure">-- bar</p>
+          </div>
+
+          <div class="stat-card status-card" id="statusCard">
+            <div class="stat-header">
+              <i data-lucide="shield-check" class="stat-icon" id="statusIcon"></i>
+              <span class="stat-label">Status</span>
+            </div>
+            <p class="stat-value" id="status">--</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chart Section -->
+      <section class="chart-section">
+        <h2 class="section-label">Live Sensor Trends</h2>
+        <div class="chart-container">
+          <canvas id="historyChart"></canvas>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
