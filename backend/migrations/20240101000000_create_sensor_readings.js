@@ -6,7 +6,7 @@ exports.up = function(knex) {
     table.float('flow_rate').notNullable();
     table.float('pressure').notNullable();
     table.string('status').notNullable();
-    table.string('leak_detected').notNullable();
+    table.boolean('leak_detected').notNullable();
     table.timestamp('created_at').defaultTo(knex.fn.now());
   });
 };
