@@ -76,11 +76,22 @@ function updateUI(latestData) {
     
     // Re-render icons to update status icon
     lucide.createIcons();
+  } else {
+    // Empty state
+    document.getElementById('zoneName').textContent = 'No data';
+    document.getElementById('zoneName').classList.add('empty');
+    document.getElementById('flowRate').textContent = 'No data';
+    document.getElementById('flowRate').classList.add('empty');
+    document.getElementById('pressure').textContent = 'No data';
+    document.getElementById('pressure').classList.add('empty');
+    document.getElementById('status').textContent = 'No data';
+    document.getElementById('status').classList.add('empty');
   }
 }
 
 function updateStatValue(elementId, newValue) {
   const el = document.getElementById(elementId);
+  el.classList.remove('empty');
   
   if (el.textContent !== newValue) {
     // Add updating class for fade-out
@@ -106,13 +117,13 @@ async function loadHistoryForZone(zone) {
   const ctx = document.getElementById('historyChart').getContext('2d');
   
   // Create gradients for chart
-  const gradientFlow = ctx.createLinearGradient(0, 0, 0, 400);
-  gradientFlow.addColorStop(0, 'rgba(14, 165, 233, 0.4)');
-  gradientFlow.addColorStop(1, 'rgba(14, 165, 233, 0)');
+  const gradientFlow = ctx.createLinearGradient(0, 0, 0, 300);
+  gradientFlow.addColorStop(0, 'rgba(6, 182, 212, 0.15)');
+  gradientFlow.addColorStop(1, 'rgba(6, 182, 212, 0)');
   
-  const gradientPressure = ctx.createLinearGradient(0, 0, 0, 400);
-  gradientPressure.addColorStop(0, 'rgba(139, 92, 246, 0.4)');
-  gradientPressure.addColorStop(1, 'rgba(139, 92, 246, 0)');
+  const gradientPressure = ctx.createLinearGradient(0, 0, 0, 300);
+  gradientPressure.addColorStop(0, 'rgba(245, 158, 11, 0.15)');
+  gradientPressure.addColorStop(1, 'rgba(245, 158, 11, 0)');
 
   if (historyChart) {
     historyChart.destroy();
@@ -126,23 +137,29 @@ async function loadHistoryForZone(zone) {
         {
           label: 'Flow Rate (L/min)',
           data: flowRates,
-          borderColor: '#0ea5e9',
+          borderColor: '#06b6d4',
           backgroundColor: gradientFlow,
           fill: true,
-          tension: 0.3,
+          tension: 0.4,
           pointRadius: 0,
-          pointHoverRadius: 4,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: '#06b6d4',
+          pointHoverBorderColor: '#ffffff',
+          pointHoverBorderWidth: 2,
           borderWidth: 2
         },
         {
           label: 'Pressure (bar)',
           data: pressures,
-          borderColor: '#8b5cf6',
+          borderColor: '#f59e0b',
           backgroundColor: gradientPressure,
           fill: true,
-          tension: 0.3,
+          tension: 0.4,
           pointRadius: 0,
-          pointHoverRadius: 4,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: '#f59e0b',
+          pointHoverBorderColor: '#ffffff',
+          pointHoverBorderWidth: 2,
           borderWidth: 2
         }
       ]
@@ -157,50 +174,54 @@ async function loadHistoryForZone(zone) {
       plugins: {
         legend: {
           labels: {
-            color: '#94a3b8',
+            color: '#9ca3af',
             font: {
               family: 'Inter',
-              size: 14
+              size: 13,
+              weight: 500
             },
             usePointStyle: true,
             padding: 20
           }
         },
         tooltip: {
-          backgroundColor: '#1e293b',
-          titleColor: '#f8fafc',
-          bodyColor: '#94a3b8',
-          borderColor: '#334155',
+          backgroundColor: '#1a2332',
+          titleColor: '#ffffff',
+          bodyColor: '#9ca3af',
+          borderColor: '#252f3f',
           borderWidth: 1,
-          padding: 12,
-          cornerRadius: 8,
+          padding: 14,
+          cornerRadius: 10,
           displayColors: true,
-          usePointStyle: true
+          usePointStyle: true,
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)'
         }
       },
       scales: {
         x: {
           ticks: {
-            color: '#64748b',
+            color: '#6b7280',
             font: {
               family: 'Inter',
               size: 12
             }
           },
           grid: {
-            color: 'rgba(51, 65, 85, 0.5)'
+            color: 'rgba(37, 47, 63, 0.5)',
+            drawBorder: false
           }
         },
         y: {
           ticks: {
-            color: '#64748b',
+            color: '#6b7280',
             font: {
               family: 'Inter',
               size: 12
             }
           },
           grid: {
-            color: 'rgba(51, 65, 85, 0.5)'
+            color: 'rgba(37, 47, 63, 0.5)',
+            drawBorder: false
           }
         }
       }
@@ -223,3 +244,4 @@ async function refresh() {
 // Initial load
 refresh();
 setInterval(refresh, 10000);
+
