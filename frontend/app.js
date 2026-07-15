@@ -146,7 +146,8 @@ async function loadHistoryForZone(zone) {
           pointHoverBackgroundColor: '#06b6d4',
           pointHoverBorderColor: '#ffffff',
           pointHoverBorderWidth: 2,
-          borderWidth: 2
+          borderWidth: 2,
+          yAxisID: 'y'
         },
         {
           label: 'Pressure (bar)',
@@ -160,7 +161,8 @@ async function loadHistoryForZone(zone) {
           pointHoverBackgroundColor: '#f59e0b',
           pointHoverBorderColor: '#ffffff',
           pointHoverBorderWidth: 2,
-          borderWidth: 2
+          borderWidth: 2,
+          yAxisID: 'y1'
         }
       ]
     },
@@ -212,8 +214,21 @@ async function loadHistoryForZone(zone) {
           }
         },
         y: {
+          type: 'linear',
+          display: true,
+          position: 'left',
+          title: {
+            display: true,
+            text: 'Flow Rate (L/min)',
+            color: '#06b6d4',
+            font: {
+              family: 'Inter',
+              size: 12,
+              weight: 600
+            }
+          },
           ticks: {
-            color: '#6b7280',
+            color: '#06b6d4',
             font: {
               family: 'Inter',
               size: 12
@@ -222,6 +237,31 @@ async function loadHistoryForZone(zone) {
           grid: {
             color: 'rgba(37, 47, 63, 0.5)',
             drawBorder: false
+          }
+        },
+        y1: {
+          type: 'linear',
+          display: true,
+          position: 'right',
+          title: {
+            display: true,
+            text: 'Pressure (bar)',
+            color: '#f59e0b',
+            font: {
+              family: 'Inter',
+              size: 12,
+              weight: 600
+            }
+          },
+          ticks: {
+            color: '#f59e0b',
+            font: {
+              family: 'Inter',
+              size: 12
+            }
+          },
+          grid: {
+            drawOnChartArea: false
           }
         }
       }
