@@ -279,6 +279,9 @@ document.getElementById('zoneSelect').addEventListener('change', async (e) => {
 async function refresh() {
   const latestData = await fetchLatestData();
   updateUI(latestData);
+  if (selectedZone) {
+    await loadHistoryForZone(selectedZone);
+  }
 }
 
 // Initial load
